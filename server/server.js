@@ -39,7 +39,7 @@ io.on('connection',(socket)=>{
   // socket.on('createEmail',(clientMail)=>{
   //   console.log('Mail from client',clientMail)
   // })
-  socket.on('createMessage',(message)=>{
+  socket.on('createMessage',(message, callback)=>{
     console.log('Message from client', message);
     // io.emit('newMessage',{
     //   from: message.from,
@@ -47,6 +47,7 @@ io.on('connection',(socket)=>{
     //   createdAt: new Date().getTime()
     // })
       io.emit('newMessage',generateMessage(message.from, message.text))
+      callback('This message is from server')
 
     // // socket.broadcast.emit('newMessage',{
     // //   from: 'Server message',
