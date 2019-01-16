@@ -17,7 +17,7 @@ io.on('connection',(socket)=>{
   socket.emit('newMessage', generateMessage('Admin','Welcome to node Chat'));
   // socket.emit('newMessage',{
   //   from:'Admin',
-  //   text: 'Welcome to node chat app',
+  //   text: 'Welcome to node chat app Branch',
   //   createdAt: new Date().getTime()
   // })
   socket.broadcast.emit('newMessage', generateMessage('Admin','New User Joined'))
