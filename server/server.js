@@ -2,7 +2,7 @@ const path = require('path')
 const http = require('http')
 const express = require('express')
 const socketIO = require('socket.io')
-const {generateMessage} = require('./utils/message')
+const {generateMessage,generateLocationMessage} = require('./utils/message')
 const publicPath = path.join(__dirname,'../public')
 const port = process.env.PORT || 3000;
 var app = express ();
@@ -17,7 +17,7 @@ io.on('connection',(socket)=>{
   socket.emit('newMessage', generateMessage('Admin','Welcome to node Chat'));
   // socket.emit('newMessage',{
   //   from:'Admin',
-  //   text: 'Welcome to node chat app',
+  //   text: 'Welcome to node chat app Master',
   //   createdAt: new Date().getTime()
   // })
   socket.broadcast.emit('newMessage', generateMessage('Admin','New User Joined'))
@@ -55,6 +55,11 @@ io.on('connection',(socket)=>{
     // //   createdAt: new Date().getTime()
     //
     // })
+  })
+
+  socket.on('createLocation', (coords)=>{
+    // io.emit('newMessage', generateMessage('Admin',`${coords.latitude}, ${coords.longitude}`))
+    io.emit('newLocationMessage',generateLocationMessage('Admin',coords.latitude,coords.longitude))
   })
 
   socket.on('disconnect',()=>{
